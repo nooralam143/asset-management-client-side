@@ -5,11 +5,15 @@ import useAssetRequest from '../../Hooks/useAssetRequest';
 const MyAssets = () => {
   const { myRequestAsset } = useAssetRequest();
   const [searchTerm, setSearchTerm] = useState('');
+  const [requestStatusFilter, setRequestStatusFilter] = useState(''); // Add request status filter
+  const [assetTypeFilter, setAssetTypeFilter] = useState(''); // Add asset type filter
+
 
   // Filter assets based on asset name
-  const filteredData = myRequestAsset.filter(item =>
-    item.assetName.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredData = myRequestAsset
+    .filter(item => item.assetName.toLowerCase().includes(searchTerm.toLowerCase()))
+    .filter(item => (requestStatusFilter ? item.requestStatus === requestStatusFilter : true))
+    .filter(item => (assetTypeFilter ? item.assetType === assetTypeFilter : true));
 
   // Sort filtered data based on assetRequestDateString in descending order
   const sortedData = filteredData.sort(
@@ -57,25 +61,58 @@ const MyAssets = () => {
     },
   };
 const handleSearch = () => {
-    
+
 }
+const handleFilter = () => {
+    
+  };
   return (
-    <div className="request-table">
-      {/* Add search bar */}
-     <div className='flex justify-center items-center my-3'>
-     <input
-        className='w-2/4 border rounded p-3 flex justify-center items-center'
-        type="text"
-        placeholder="Search by asset name..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      /> <button
-      className="rounded p-3 bg-[#91C840] text-white space"
-      onClick={handleSearch}
-    >
-      Search
-    </button>
-     </div>
+     <div className="request-table">
+      <div className='flex justify-center items-center my-3'>
+        <input
+          className='w-2/4 border rounded p-3 flex justify-center items-center'
+          type="text"
+          placeholder="Search by asset name..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button
+          className="rounded p-3 bg-[#91C840] text-white space"
+          onClick={handleSearch}
+        >
+          Search
+        </button>
+      </div>
+
+      {/* Add filter section */}
+      <div className='flex justify-center items-center my-3'>
+        <label>Request Status:</label>
+        <select
+          value={requestStatusFilter}
+          onChange={(e) => setRequestStatusFilter(e.target.value)}
+        >
+          <option value="">All</option>
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
+        </select>
+
+        <label>Asset Type:</label>
+        <select
+          value={assetTypeFilter}
+          onChange={(e) => setAssetTypeFilter(e.target.value)}
+        >
+          <option value="">All</option>
+          <option value="Returnable">Returnable</option>
+          <option value="Non-returnable">Non-returnable</option>
+        </select>
+
+        <button
+          className="rounded p-3 bg-[#91C840] text-white space"
+          onClick={handleFilter}
+        >
+          Apply Filters
+        </button>
+      </div>
 
       {filteredData.length === 0 ? (
         <p>No assets found</p>
