@@ -20,10 +20,10 @@ const CustomeRequest = () => {
         e.preventDefault();
         const form = e.target;
         const assetName = form.assetName.value;
-        const price = form.assetName.value;
+        const price = form.price.value;
         const assetType = selectedType;
-        const assetImage = form.assetName.value;
-        const whyNeedAsset = form.assetName.value;
+        const assetImage = form.assetImage.value;
+        const whyNeedAsset = form.whyNeedAsset.value;
         const assetRequestDate = new Date();
         const optionsRequestDate = { timeZone: 'Asia/Dhaka' };
         const assetRequestDateString = assetRequestDate.toLocaleString('en-US', optionsRequestDate);
@@ -84,7 +84,7 @@ const CustomeRequest = () => {
                         <div className="mb-2 block">
                             <Label htmlFor="whyNeedAsset" value="Why you Need This" />
                         </div>
-                        <Textarea id="whyNeedAsset" placeholder="Why you Need This" required rows={4} />
+                        <Textarea id="whyNeedAsset" name="whyNeedAsset" placeholder="Why you Need This" required rows={4} />
                     </div>
                     <Button type="submit">Request Asset</Button>
                 </form>

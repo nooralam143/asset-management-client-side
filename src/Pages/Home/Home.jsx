@@ -10,6 +10,7 @@ import Slidder from "./DefaultHome/Slidder/Slidder";
 import AboutSection from "./DefaultHome/About/AboutSection";
 import Package from "./DefaultHome/Package/Package";
 import ReviewSwiper from "./DefaultHome/Review/Review";
+import RequestdLatestItem from "./EmployeeHome/MyMonthlyRequests/RequestdLatestItem";
 
 
 
@@ -17,8 +18,8 @@ import ReviewSwiper from "./DefaultHome/Review/Review";
 
 const Home = () => {
     const { user } = useContext(AuthContext);
-    const {loggedInUserDetails}=useUserDetails();
-    
+    const { loggedInUserDetails } = useUserDetails();
+
     console.log("User loggedInUserDetails:", loggedInUserDetails);
     console.log("User object:", user);
 
@@ -27,36 +28,50 @@ const Home = () => {
 
 
     return (
-        
+
         <div>
             <Helmet>
                 <title>AssetPro | Home</title>
             </Helmet>
             <div>
-               { !userRole && 
-               <>
-               <Slidder></Slidder>
-               <AboutSection></AboutSection>
-                <Package></Package>
-                <ReviewSwiper></ReviewSwiper>
-                </>
-               }
-               
-                { userRole=="employee" &&
+                {!userRole &&
                     <>
-                    <MyCustomeRequests></MyCustomeRequests>
-                    <MyPendingRequests></MyPendingRequests>
-                    <MyMonthlyRequests></MyMonthlyRequests>
+                        <Slidder></Slidder>
+                        <AboutSection></AboutSection>
+                        <Package></Package>
+                        <ReviewSwiper></ReviewSwiper>
                     </>
                 }
-                   { userRole=="admin" &&
-                    <div>
-                    Admin login
-                </div>
+
+                {userRole == "employee" &&
+                    <>
+                        <div>
+                        <div className="flex flex-row justify-center items-center gap-5">
+  <div className="border bg-slate-900 text-white h-28 w-1/5 flex items-center justify-center">
+    <MyCustomeRequests></MyCustomeRequests>
+  </div>
+  <div className="border bg-pink-500 text-white h-28 w-1/5 flex items-center justify-center">
+    <MyPendingRequests></MyPendingRequests>
+  </div>
+  <div className="border bg-pink-700 text-white h-28 w-1/5 flex items-center justify-center">
+    <MyMonthlyRequests></MyMonthlyRequests>
+  </div>
+ 
+</div>
+<div className="p-5">
+<RequestdLatestItem></RequestdLatestItem>
+</div>
+                        </div>
+                        </>
                 }
-                
+                        {userRole == "admin" &&
+                            <div>
+                                Admin login
+                            </div>
+                        }
+
+                    </div>
             </div>
-        </div>
     );
 };
 
