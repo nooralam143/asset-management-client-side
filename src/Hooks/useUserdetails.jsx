@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import axios from "axios";
 
 const axiosPublic = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'https://assetpro-server-side.vercel.app'
 })
 
 const useUserDetails = () => {

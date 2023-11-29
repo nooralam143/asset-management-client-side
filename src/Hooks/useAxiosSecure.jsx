@@ -4,7 +4,7 @@ import useAuth from "./useAuth";
 
 
 const axiosSecure = axios.create({
-    baseURL: 'https://assetpro-server-side.vercel.app/'
+    baseURL: 'https://assetpro-server-side.vercel.app'
 })
 const useAxiosSecure = () => {
     const navigate = useNavigate();

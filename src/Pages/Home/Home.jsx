@@ -5,12 +5,19 @@ import Slidder from "./Slidder/Slidder";
 import Package from "./Package/Package";
 import AboutSection from "./About/AboutSection";
 import Review from "./Review/Review";
+import useUserDetails from "../../Hooks/useUserdetails";
+
+
 
 
 const Home = () => {
     const { user } = useContext(AuthContext);
-    console.log("User object:", user);
+    const {loggedInUserDetails}=useUserDetails();
     
+    console.log("User loggedInUserDetails:", loggedInUserDetails);
+    console.log("User object:", user);
+
+
     return (
         
         <div>

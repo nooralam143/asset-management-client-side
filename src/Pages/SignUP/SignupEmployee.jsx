@@ -5,6 +5,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import SocialLogin from "../../Component/SocialLogin/SocialLogin";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 
 
