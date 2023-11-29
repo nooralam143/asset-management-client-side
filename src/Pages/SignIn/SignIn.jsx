@@ -14,7 +14,7 @@ const SignIn = () => {
     const [loginError, setLoginError] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
-
+const role ="employee"
     
 
 
@@ -65,12 +65,12 @@ const SignIn = () => {
             {loginError && <p className="text-center text-red-700">{loginError}</p>}
            {loginSuccess && <p className="text-center text-green-700">{loginSuccess}</p>}
            <div className="text-center pb-2">
-               <Link to="/register">
-                   Not have an account? <span className="text-blue-600">SignUp here</span>
+               <Link to="/signup-employee">
+                   Not have an account? <span className="text-blue-600">SignUp an employee here</span>
                </Link>
            </div>
            <div className="flex flex-row text-blue-600 font-bold justify-center items-center text-center pb-8 ">
-           <SocialLogin></SocialLogin>
+           <SocialLogin role={role}></SocialLogin>
            </div>
           </Card>
            </>

@@ -2,6 +2,9 @@ import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useContext } from "react";
 import Slidder from "./Slidder/Slidder";
+import Package from "./Package/Package";
+import AboutSection from "./About/AboutSection";
+import Review from "./Review/Review";
 
 
 const Home = () => {
@@ -16,20 +19,9 @@ const Home = () => {
             </Helmet>
             <div>
                 <Slidder></Slidder>
-                {user ? (
-                    <>
-                        <div>
-                            Name: {user.displayName || 'N/A'}
-                        </div>
-                        <div>
-                            Email: {user.email || 'N/A'}
-                        </div>
-                    </>
-                ) : (
-                    <div>
-                        User not available.
-                    </div>
-                )}
+                <AboutSection></AboutSection>
+                <Package></Package>
+                <Review></Review>
             </div>
         </div>
     );

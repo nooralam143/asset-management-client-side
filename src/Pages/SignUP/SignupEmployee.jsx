@@ -4,14 +4,22 @@ import { Button, Card,Checkbox,Datepicker,Label, TextInput } from 'flowbite-reac
 import { AuthContext } from "../../providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import SocialLogin from "../../Component/SocialLogin/SocialLogin";
+import { Helmet } from "react-helmet-async";
+
+
 
 
 const SignupEmployee = () => {
+    const axiosPublic = useAxiosPublic();
     const [registerError, setRegisterError] = useState('');
     const [success, setSuccess] = useState('');
     const { createUser, user } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
+    const role = "employee";
+    const SignUpDate = new Date();
+    const options = { timeZone: 'Asia/Dhaka' };
+    const signUpDateString = SignUpDate.toLocaleString('en-US', options);
     if (user) {
         navigate(location?.state?.from || '/');
     }
@@ -22,9 +30,9 @@ const SignupEmployee = () => {
         const name = form.get('name');
         const photo = form.get('photo');
         const email = form.get('email');
-        const dateOfBirth = form.get('email');
+        const dateOfBirth = form.get('dateOfBirth');
         const password = form.get('password');
-        console.log(name, photo, email, dateOfBirth, password);
+        console.log(name, photo, email, dateOfBirth, password, role);
 
         // Registration validation start
         if (password.length < 6) {
@@ -54,6 +62,15 @@ const SignupEmployee = () => {
                 })
                     .then(() => {
                         console.log('profile updted');
+                        const userInfo = {
+                            name,
+                            email,
+                            photo,
+                            dateOfBirth,
+                            role,
+                            signUpDateString
+                        }
+                        axiosPublic.post('/users', userInfo)
                     })
                     .catch(error => {
                         console.log(error.message);
@@ -70,6 +87,9 @@ const SignupEmployee = () => {
   
     return (
         <>
+        <Helmet>
+                <title>AssetPro | Sign Up Employee</title>
+            </Helmet>
             <Card className="max-w-sm mx-auto mt-10 mb-10">
                 <form className="flex flex-col gap-4" onSubmit={handalRegister}>
                 <div>
@@ -114,7 +134,7 @@ const SignupEmployee = () => {
           </a>
         </Label>
       </div>
-                    <Button type="submit">SignUp</Button>
+                    <Button className="text-[#91C840]" type="submit">SignUp</Button>
                 </form>
                 {
                     registerError && <p className="text-center text-red-700">{registerError}</p>
@@ -128,7 +148,7 @@ const SignupEmployee = () => {
                     </Link>
                 </div>
                 <div className="flex flex-row text-blue-600 font-bold justify-center items-center text-center pb-8 ">
-           <SocialLogin></SocialLogin>
+           <SocialLogin role={role}></SocialLogin>
            </div>
             </Card>
         </>

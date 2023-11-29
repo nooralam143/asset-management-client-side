@@ -4,8 +4,14 @@ import { Link, NavLink } from 'react-router-dom';
 import "../Navbar/Navbar.css"
 import { AuthContext } from '../../providers/AuthProvider';
 
+
+
+
 const NavbarComponent = () => {
   const { user, logOut } = useContext(AuthContext);
+  // const {loggedInUserDetails}= useUserDetails()
+  // console.log("user is", user);
+  // console.log("loggin user details",loggedInUserDetails);
 
 
   const handalSignout = () => {
@@ -17,6 +23,8 @@ const NavbarComponent = () => {
         console.log(error);
       })
   }
+
+
   return (
     <Navbar fluid rounded>
       <Link href="/" className='flex'>
@@ -25,8 +33,11 @@ const NavbarComponent = () => {
       </Link>
       <div className="flex md:order-2">
         {
-          user ?
-            <>
+          !user ?
+            <Link to="/login">
+              <button className="btn btn-sm h-10 pr-1">Login</button>
+            </Link>
+            :
               <Dropdown
                 arrowIcon={false}
                 inline
@@ -42,25 +53,39 @@ const NavbarComponent = () => {
                 <Dropdown.Item>Settings</Dropdown.Item>
                 <Dropdown.Item>Earnings</Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item><button onClick={handalSignout}>Sign out</button></Dropdown.Item>
+                <Dropdown.Item> <span onClick={handalSignout}>Sign out</span></Dropdown.Item>
               </Dropdown>
-            </>
-            :
-
-            <Link to="/login">
-              <button className="btn btn-sm h-10 pr-1">Login</button>
-            </Link>
-
         }
         <Navbar.Toggle />
       </div>
-
-
       <Navbar.Collapse>
-          <li><NavLink to="/">Home</NavLink></li>
-          <li><NavLink to="/signup-employee">Join As Employee</NavLink></li>
-          <li><NavLink to="/signup-admin">Join As HR/Admin</NavLink></li>
+        <li><NavLink to="/">Home</NavLink></li>
+        {!user &&
+          <>
+            <li><NavLink to="/signup-employee">Join As Employee</NavLink></li>
+            <li><NavLink to="/signup-admin">Join As HR/Admin</NavLink></li>
+          </>
+        }
 
+        {/* {
+            user &&  loginUserDetails?.role === "employee" && <>
+            <li><NavLink to="/my-teem">My Teem</NavLink></li>
+            <li><NavLink to="/my-assets">My Assets</NavLink></li>
+            <li><NavLink to="/request-asset">Request for an Asset</NavLink></li>
+            <li><NavLink to="/custome-request-assets">Make a Custome Request</NavLink></li>
+            <li><NavLink to="/profile">Profile</NavLink></li></>
+        }
+             {
+            user &&  loginUserDetails?.role === "admin" &&
+            <>
+        <li><NavLink to="/employee-list">Employee List</NavLink></li>
+        <li><NavLink to="/add-employee">Add Employee</NavLink></li>
+        <li><NavLink to="/asset-list">Asset List</NavLink></li>
+        <li><NavLink to="/dashboard/add-asset">Add Asset</NavLink></li>
+        <li><NavLink to="/all-request">All Request</NavLink></li>
+        <li><NavLink to="/custome-request-list">Custome Requests List</NavLink></li>
+        </>
+        } */}
 
       </Navbar.Collapse>
     </Navbar>

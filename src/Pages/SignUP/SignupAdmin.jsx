@@ -3,14 +3,26 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
 import { Button,Select, Card,Checkbox,Datepicker,Label, TextInput } from 'flowbite-react';
 import { AuthContext } from "../../providers/AuthProvider";
-import SocialLogin from "../../Component/SocialLogin/SocialLogin";
+import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const SignupAdmin = () => {
+    const axiosPublic = useAxiosPublic();
     const [registerError, setRegisterError] = useState('');
+    const [selectedPackageId, setSelectedPackageId] = useState('5 member for $5');
+    const handlePackageChange  = (e) => {
+        setSelectedPackageId(e.target.value);
+    };
+
     const [success, setSuccess] = useState('');
     const { createUser, user} = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
+    const role = "admin";
+    const SignUpDate = new Date();
+    const options = { timeZone: 'Asia/Dhaka' };
+    const signUpDateString = SignUpDate.toLocaleString('en-US', options);
+    
     if (user) {
         navigate(location?.state?.from || '/');
     }
@@ -21,9 +33,14 @@ const SignupAdmin = () => {
         const name = form.get('name');
         const photo = form.get('photo');
         const email = form.get('email');
-        const dateOfBirth = form.get('email');
+        const companyName = form.get('companyName');
+        const MemberLimit = form.get('BuyPackage');
+        const dateOfBirth = form.get('dateOfBirth');
         const password = form.get('password');
-        console.log(name, photo, email, dateOfBirth, password);
+
+        
+
+        console.log(name, photo, email, companyName,MemberLimit, dateOfBirth, password);
 
         // Registration validation start
         if (password.length < 6) {
@@ -53,6 +70,18 @@ const SignupAdmin = () => {
                 })
                     .then(() => {
                         console.log('profile updted');
+                        const userInfo = {
+                            name,
+                            email,
+                            photo,
+                            dateOfBirth,
+                            companyName,
+                            packageId: selectedPackageId,
+                            role,
+                            signUpDateString
+                        }
+                        axiosPublic.post('/users', userInfo)
+
                     })
                     .catch(error => {
                         console.log(error.message);
@@ -69,6 +98,9 @@ const SignupAdmin = () => {
 
     return (
         <>
+        <Helmet>
+                <title>AssetPro | Sign Up Admin</title>
+            </Helmet>
             <Card className="max-w-sm mx-auto mt-10 mb-10">
                 <form className="flex flex-col gap-4" onSubmit={handalRegister}>
                 <div>
@@ -81,13 +113,13 @@ const SignupAdmin = () => {
                         <div className="mb-2 block">
                             <Label htmlFor="name" value="Company Name" />
                         </div>
-                        <TextInput id="name" name="name" type="text" placeholder="Company Name" required />
+                        <TextInput id="name" name="companyName" type="text" placeholder="Company Name" required />
                     </div>
                     <div>
                         <div className="mb-2 block">
                             <Label htmlFor="photo" value="Company Logo URL" />
                         </div>
-                        <TextInput id="photo" name="photo" type="text" placeholder="Company Logo UR" required />
+                        <TextInput id="photo" name="photo" type="text" placeholder="Company Logo URL" required />
                     </div>
                     <div>
                         <div className="mb-2 block">
@@ -104,12 +136,12 @@ const SignupAdmin = () => {
                     </div>
                     <div className="max-w-md">
       <div className="mb-2 block">
-        <Label htmlFor="Package" value="Select your Package" />
+        <Label htmlFor="BuyPackage" value="Select your Package" />
       </div>
-      <Select id="Package" required>
-        <option>5 Members</option>
-        <option>10 Members</option>
-        <option>15 Members</option>
+      <Select id="BuyPackage" name="BuyPackage" value={selectedPackageId} onChange={handlePackageChange} required>
+        <option>5 member for $5</option>
+        <option>10 member for $8</option>
+        <option>20 member for $15</option>
       </Select>
     </div>
 
@@ -142,7 +174,7 @@ const SignupAdmin = () => {
                     </Link>
                 </div>
                 <div className="flex flex-row text-blue-600 font-bold justify-center items-center text-center pb-8 ">
-           <SocialLogin></SocialLogin>
+           
            </div>
             </Card>
         </>
