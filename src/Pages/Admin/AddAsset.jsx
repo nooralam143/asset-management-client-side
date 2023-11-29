@@ -4,7 +4,8 @@ import { Helmet } from "react-helmet-async";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+
 
 
 const AddAsset = () => {

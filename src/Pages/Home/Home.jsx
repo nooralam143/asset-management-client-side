@@ -1,11 +1,16 @@
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useContext } from "react";
-import Slidder from "./Slidder/Slidder";
-import Package from "./Package/Package";
-import AboutSection from "./About/AboutSection";
-import Review from "./Review/Review";
 import useUserDetails from "../../Hooks/useUserdetails";
+
+import MyCustomeRequests from "./EmployeeHome/MyCustomeRequests/MyCustomeRequests";
+import MyPendingRequests from "./EmployeeHome/MyPendingRequests/MyPendingRequests";
+import MyMonthlyRequests from "./EmployeeHome/MyMonthlyRequests/MyMonthlyRequests";
+import Slidder from "./DefaultHome/Slidder/Slidder";
+import AboutSection from "./DefaultHome/About/AboutSection";
+import Package from "./DefaultHome/Package/Package";
+import ReviewSwiper from "./DefaultHome/Review/Review";
+
 
 
 
@@ -17,6 +22,9 @@ const Home = () => {
     console.log("User loggedInUserDetails:", loggedInUserDetails);
     console.log("User object:", user);
 
+    const userRole = loggedInUserDetails?.role;
+    console.log("User role:", userRole);
+
 
     return (
         
@@ -25,10 +33,28 @@ const Home = () => {
                 <title>AssetPro | Home</title>
             </Helmet>
             <div>
-                <Slidder></Slidder>
-                <AboutSection></AboutSection>
+               { !userRole && 
+               <>
+               <Slidder></Slidder>
+               <AboutSection></AboutSection>
                 <Package></Package>
-                <Review></Review>
+                <ReviewSwiper></ReviewSwiper>
+                </>
+               }
+               
+                { userRole=="employee" &&
+                    <>
+                    <MyCustomeRequests></MyCustomeRequests>
+                    <MyPendingRequests></MyPendingRequests>
+                    <MyMonthlyRequests></MyMonthlyRequests>
+                    </>
+                }
+                   { userRole=="admin" &&
+                    <div>
+                    Admin login
+                </div>
+                }
+                
             </div>
         </div>
     );

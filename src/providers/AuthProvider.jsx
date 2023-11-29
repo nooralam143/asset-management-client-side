@@ -23,7 +23,10 @@ const AuthProvider = ({ children }) => {
     const signIn = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
+        
     };
+
+
     const signinWithGoogle = () => {
         setLoading(true);
         signInWithPopup(auth, googleProvider)
@@ -38,18 +41,24 @@ const AuthProvider = ({ children }) => {
             displayName: name, photoURL: photo
         });
     }
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-            // const userInfo = {
-            //     name: currentUser.displayName,
-            //     email: currentUser.email,
-            //     photo: currentUser.photoURL,
-            //     role: "employee"
-            // };
-            // axiosPublic.post('/users', userInfo)
-            
+            if (currentUser) {
+                const userInfo = {
+                    name: currentUser?.displayName,
+                    email: currentUser?.email,
+                    photo: currentUser?.photoURL,
+                    role: "employee"
+                };
+                axiosPublic.post('/users', userInfo)
+                    .then(() => {
+                            setLoading(false);
+                    })
+            }
+            else {
+                setLoading(false);
+            }
             
         });
         return () => {

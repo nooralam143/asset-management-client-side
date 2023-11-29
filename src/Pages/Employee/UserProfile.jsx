@@ -1,16 +1,16 @@
-import { useContext } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
 import { Button, TextInput } from "flowbite-react";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useUserDetails from "../../Hooks/useUserdetails";
 
 
 
 const UserProfile = () => {
   const axiosPublic = useAxiosPublic();
-  const {loginUserDetails  } = useContext(AuthContext);
-  
+  const {loggedInUserDetails}=useUserDetails();
+  console.log(loggedInUserDetails);
+
 const handalUpdateProfile = async (e) => {
   e.preventDefault();
   const form = e.target;
@@ -19,7 +19,7 @@ const handalUpdateProfile = async (e) => {
 const updateUser = {name, dateOfBirth}
 
 try {
-  const response = await axiosPublic.put(`/users/${loginUserDetails._id}`, updateUser);
+  const response = await axiosPublic.put(`/users/${loggedInUserDetails._id}`, updateUser);
 
   if (response.status === 200) {
       toast.success('user information update successfully');
@@ -53,19 +53,19 @@ try {
 
                 <dt className="text-sm font-medium text-gray-500">Full name</dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                <TextInput id="name" name="name" defaultValue={loginUserDetails?.name} type="name" autoComplete="Full Name" placeholder="Full Name" required /> 
+                <TextInput id="name" name="name" defaultValue={loggedInUserDetails?.name} type="name" autoComplete="Full Name" placeholder="Full Name" required /> 
                 </dd>
               </div>
               <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt className="text-sm font-medium text-gray-500">Email address</dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {loginUserDetails?.email}
+                  {loggedInUserDetails?.email}
                 </dd>
               </div>
               <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt className="text-sm font-medium text-gray-500">Date of Birth</dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                <TextInput id="dateOfBirth" name="dateOfBirth" defaultValue={loginUserDetails?.dateOfBirth} type="text" autoComplete="Full Name" placeholder="Date of Birth" required /> 
+                <TextInput id="dateOfBirth" name="dateOfBirth" defaultValue={loggedInUserDetails?.dateOfBirth} type="text" autoComplete="Full Name" placeholder="Date of Birth" required /> 
                 
                 </dd>
               </div>

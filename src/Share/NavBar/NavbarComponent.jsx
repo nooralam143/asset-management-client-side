@@ -3,12 +3,14 @@ import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import "../Navbar/Navbar.css"
 import { AuthContext } from '../../providers/AuthProvider';
+import useUserDetails from '../../Hooks/useUserdetails';
 
 
 
 
 const NavbarComponent = () => {
   const { user, logOut } = useContext(AuthContext);
+  const {loggedInUserDetails}=useUserDetails();
   // const {loggedInUserDetails}= useUserDetails()
   // console.log("user is", user);
   // console.log("loggin user details",loggedInUserDetails);
@@ -67,8 +69,8 @@ const NavbarComponent = () => {
           </>
         }
 
-        {/* {
-            user &&  loginUserDetails?.role === "employee" && <>
+        {
+            user &&  loggedInUserDetails?.role === "employee" && <>
             <li><NavLink to="/my-teem">My Teem</NavLink></li>
             <li><NavLink to="/my-assets">My Assets</NavLink></li>
             <li><NavLink to="/request-asset">Request for an Asset</NavLink></li>
@@ -76,7 +78,7 @@ const NavbarComponent = () => {
             <li><NavLink to="/profile">Profile</NavLink></li></>
         }
              {
-            user &&  loginUserDetails?.role === "admin" &&
+            user &&  loggedInUserDetails?.role === "admin" &&
             <>
         <li><NavLink to="/employee-list">Employee List</NavLink></li>
         <li><NavLink to="/add-employee">Add Employee</NavLink></li>
@@ -85,7 +87,7 @@ const NavbarComponent = () => {
         <li><NavLink to="/all-request">All Request</NavLink></li>
         <li><NavLink to="/custome-request-list">Custome Requests List</NavLink></li>
         </>
-        } */}
+        }
 
       </Navbar.Collapse>
     </Navbar>

@@ -13,8 +13,9 @@ import MyAssets from './../Pages/Employee/MyAssets';
 import RequestAsset from './../Pages/Employee/RequestAsset';
 import CustomeRequest from './../Pages/Employee/CustomeRequest';
 import AddAsset from "../Pages/Admin/AddAsset";
-import UserProfile from "../Pages/Employee/UserProfile";
+
 import EmployeeHome from "../Pages/Employee/EmployeeHome";
+import UserProfile from './../Pages/Employee/UserProfile';
 
 export const router = createBrowserRouter([
   {
@@ -66,18 +67,6 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       // normal user routes
-      {
-        path: 'add-asset', // Corrected path
-        element: <AddAsset></AddAsset>
-      }
-    ]
-  },
-  {
-    path: 'admin-dashboard',
-    element: <PrivateRoute><EmployeeHome></EmployeeHome></PrivateRoute>,
-    errorElement: <ErrorPage></ErrorPage>,
-    children: [
-      // admin routes
       {
         path: 'add-asset', // Corrected path
         element: <AddAsset></AddAsset>

@@ -12,7 +12,7 @@ const PrivateRoute = ({ children }) => {
     if (loading) {
         return (
             <div className="text-center">
-        <Spinner aria-label="Center-aligned spinner example" />
+       <Spinner color="info" aria-label="Info spinner example" />
       </div>
         )
     }
