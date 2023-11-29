@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Button, Card,Checkbox,Datepicker,Label, TextInput } from 'flowbite-react';
+import { Button, Card, Checkbox, Datepicker, Label, TextInput } from 'flowbite-react';
 import { AuthContext } from "../../providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import SocialLogin from "../../Component/SocialLogin/SocialLogin";
@@ -34,7 +34,14 @@ const SignupEmployee = () => {
         const dateOfBirth = form.get('dateOfBirth');
         const password = form.get('password');
         console.log(name, photo, email, dateOfBirth, password, role);
-
+        const userInfo = {
+            name,
+            email,
+            photo,
+            dateOfBirth,
+            role,
+            signUpDateString
+        }
         // Registration validation start
         if (password.length < 6) {
             setRegisterError('password should have 6 characters')
@@ -61,23 +68,14 @@ const SignupEmployee = () => {
                     photoURL: photo,
                     dateOfBirth: dateOfBirth,
                 })
-                    .then(() => {
-                        console.log('profile updted');
-                        const userInfo = {
-                            name,
-                            email,
-                            photo,
-                            dateOfBirth,
-                            role,
-                            signUpDateString
-                        }
-                        axiosPublic.post('/users', userInfo)
-                    })
-                    .catch(error => {
-                        console.log(error.message);
-
-                    })
-                navigate(location?.state?.from || '/');
+                axiosPublic.post('/users', userInfo)
+                console.log('profile updted')
+                .then(() => {
+                    navigate(location?.state?.from || '/');
+                })
+                .catch(error => {
+                    console.log(error.message);
+                })    
             })
             .catch(error => {
                 setRegisterError(error.message);
@@ -85,15 +83,15 @@ const SignupEmployee = () => {
 
 
     }
-  
+
     return (
         <>
-        <Helmet>
+            <Helmet>
                 <title>AssetPro | Sign Up Employee</title>
             </Helmet>
             <Card className="max-w-sm mx-auto mt-10 mb-10">
                 <form className="flex flex-col gap-4" onSubmit={handalRegister}>
-                <div>
+                    <div>
                         <div className="mb-2 block">
                             <Label htmlFor="name" value="Full Name" />
                         </div>
@@ -127,14 +125,14 @@ const SignupEmployee = () => {
                         <TextInput id="password1" name="password" autoComplete="password" type="password" required />
                     </div>
                     <div className="flex items-center gap-2">
-        <Checkbox id="accept" defaultChecked />
-        <Label htmlFor="accept" className="flex">
-          I agree with the&nbsp;
-          <a href="#" className="text-cyan-600 hover:underline dark:text-cyan-500">
-            terms and conditions
-          </a>
-        </Label>
-      </div>
+                        <Checkbox id="accept" defaultChecked />
+                        <Label htmlFor="accept" className="flex">
+                            I agree with the&nbsp;
+                            <a href="#" className="text-cyan-600 hover:underline dark:text-cyan-500">
+                                terms and conditions
+                            </a>
+                        </Label>
+                    </div>
                     <Button className="text-[#91C840]" type="submit">SignUp</Button>
                 </form>
                 {
@@ -149,8 +147,8 @@ const SignupEmployee = () => {
                     </Link>
                 </div>
                 <div className="flex flex-row text-blue-600 font-bold justify-center items-center text-center pb-8 ">
-           <SocialLogin role={role}></SocialLogin>
-           </div>
+                    <SocialLogin role={role}></SocialLogin>
+                </div>
             </Card>
         </>
     );

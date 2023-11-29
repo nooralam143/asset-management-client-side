@@ -8,7 +8,7 @@ import SignupAdmin from "../Pages/SignUP/SignupAdmin";
 import Home from "../Pages/Home/Home";
 import PrivateRoute from './PrivateRoute';
 import ErrorPage from "../Share/ErrorPage/ErrorPage";
-import MyTeem from "../Pages/Employee/MyTeem";
+import MyTeem from "../Pages/Employee/MyTeem/MyTeem";
 import MyAssets from './../Pages/Employee/MyAssets';
 import RequestAsset from './../Pages/Employee/RequestAsset';
 import CustomeRequest from './../Pages/Employee/CustomeRequest';
