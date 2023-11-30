@@ -12,6 +12,8 @@ import Package from "./DefaultHome/Package/Package";
 import ReviewSwiper from "./DefaultHome/Review/Review";
 import RequestdLatestItem from "./EmployeeHome/MyMonthlyRequests/RequestdLatestItem";
 import CustomeRequestList from "./EmployeeHome/MyCustomeRequests/CustomeRequestList";
+import AdminPendingRequest from "./AdminHome/AdminPendingRequest/AdminPendingRequest";
+import AdminPendingRequestSection from "./AdminHome/AdminPendingRequest/AdminPendingRequestSection";
 
 
 
@@ -69,9 +71,14 @@ const Home = () => {
                         </>
                 }
                         {userRole == "admin" &&
+                           <>
                             <div>
-                                Admin login
+                               <AdminPendingRequest></AdminPendingRequest>
                             </div>
+                            <div>
+                               <AdminPendingRequestSection></AdminPendingRequestSection>
+                            </div>
+                           </>
                         }
 
                     </div>

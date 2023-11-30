@@ -12,10 +12,14 @@ import MyTeem from "../Pages/Employee/MyTeem/MyTeem";
 import MyAssets from './../Pages/Employee/MyAssets';
 import RequestAsset from './../Pages/Employee/RequestAsset';
 import CustomeRequest from './../Pages/Employee/CustomeRequest';
-import AddAsset from "../Pages/Admin/AddAsset";
-
 import EmployeeHome from "../Pages/Employee/EmployeeHome";
 import UserProfile from './../Pages/Employee/UserProfile';
+import MyEmployeeList from "../Pages/Admin/MyEmployeeList";
+import AddEmployee from "../Pages/Admin/AddEmployee";
+import AssetList from "../Pages/Admin/AssetList";
+import AllRequest from "../Pages/Admin/AllRequest";
+import AddAsset from "../Pages/Admin/AddAsset";
+import CustomeRequestList from "../Pages/Admin/CustomeRequestList";
 
 export const router = createBrowserRouter([
   {
@@ -58,18 +62,30 @@ export const router = createBrowserRouter([
       {
         path: 'profile',
         element: <PrivateRoute><UserProfile></UserProfile></PrivateRoute>
-      }
-    ]
-  },
-  {
-    path: 'dashboard',
-    element: <PrivateRoute><EmployeeHome></EmployeeHome></PrivateRoute>,
-    errorElement: <ErrorPage></ErrorPage>,
-    children: [
-      // normal user routes
+      },
       {
-        path: 'add-asset', // Corrected path
-        element: <AddAsset></AddAsset>
+        path: 'employee-list',
+        element: <PrivateRoute><MyEmployeeList></MyEmployeeList></PrivateRoute>
+      },
+      {
+        path: 'add-employee',
+        element: <PrivateRoute><AddEmployee></AddEmployee></PrivateRoute>
+      },
+      {
+        path: 'asset-list',
+        element: <PrivateRoute><AssetList></AssetList></PrivateRoute>
+      },
+      {
+        path: 'add-asset',
+        element: <PrivateRoute><AddAsset></AddAsset></PrivateRoute>
+      },
+      {
+        path: 'all-request',
+        element: <PrivateRoute><AllRequest></AllRequest></PrivateRoute>
+      },
+      {
+        path: 'custome-request-list',
+        element: <PrivateRoute><CustomeRequestList></CustomeRequestList></PrivateRoute>
       }
     ]
   }

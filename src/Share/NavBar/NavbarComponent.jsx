@@ -83,7 +83,7 @@ const NavbarComponent = () => {
         <li><NavLink to="/employee-list">Employee List</NavLink></li>
         <li><NavLink to="/add-employee">Add Employee</NavLink></li>
         <li><NavLink to="/asset-list">Asset List</NavLink></li>
-        <li><NavLink to="/dashboard/add-asset">Add Asset</NavLink></li>
+        <li><NavLink to="/add-asset">Add Asset</NavLink></li>
         <li><NavLink to="/all-request">All Request</NavLink></li>
         <li><NavLink to="/custome-request-list">Custome Requests List</NavLink></li>
         </>
