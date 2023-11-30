@@ -1,7 +1,7 @@
 import { Avatar, Dropdown, Navbar } from 'flowbite-react';
 import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import "../Navbar/Navbar.css"
+import "../NavBar/Navbar.css"
 import { AuthContext } from '../../providers/AuthProvider';
 import useUserDetails from '../../Hooks/useUserdetails';
 

@@ -1,7 +1,7 @@
 import { Button, TextInput } from "flowbite-react";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useUserDetails from "../../Hooks/useUserdetails";
 
 

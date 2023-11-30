@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import PropTypes from 'prop-types';
 import { app } from "../firebase/firebaseConfig";
-import useAxiosPublic from "../hooks/useAxiosPublic";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 
 

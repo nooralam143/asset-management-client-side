@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../providers/AuthProvider";
 
 
