@@ -42,29 +42,16 @@ const AuthProvider = ({ children }) => {
         });
     }
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+        const unSubscribe = onAuthStateChanged(auth, currentUser => {
+            console.log('uer in the auth state change', currentUser);
             setUser(currentUser);
-            if (currentUser) {
-                const userInfo = {
-                    name: currentUser?.displayName,
-                    email: currentUser?.email,
-                    photo: currentUser?.photoURL,
-                    role: "employee"
-                };
-                axiosPublic.post('/users', userInfo)
-                    .then(() => {
-                            setLoading(false);
-                    })
-            }
-            else {
-                setLoading(false);
-            }
-            
+            setLoading(false);
         });
         return () => {
-            return unsubscribe();
+            unSubscribe();
         }
-    }, [axiosPublic])
+    }, [])
+
 
     const Authinfo = {
         user,

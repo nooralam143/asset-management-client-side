@@ -26,7 +26,8 @@ The modal will have a text input field for additional notes and a request button
 🚩Note:
 -> You should store the current date as Request date. (Don’t show it in the modal
 section)
--> You should store the logged-in user’s information for HR/Admin
+-> You should store the logged-in user’s information for HR/Admin 
+todo list
  */}
         </div>
     );
