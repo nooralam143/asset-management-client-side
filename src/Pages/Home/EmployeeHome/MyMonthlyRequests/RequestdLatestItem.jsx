@@ -43,9 +43,9 @@ const RequestLatestItem = () => {
     },
     headCells: {
       style: {
-        paddingLeft: '8px', // Adjust header cell padding
+        paddingLeft: '8px', // header cell padding
         paddingRight: '8px',
-        backgroundColor: '#BE185D',// Change header background color
+        backgroundColor: '#BE185D',// header background color
         color: 'white', 
       },
     },
