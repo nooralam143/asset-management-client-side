@@ -104,13 +104,17 @@ const AssetList = () => {
   const handleFilter = (type, value) => {
     const filtered = formattedData.filter((item) => {
       if (type === 'stockStatus') {
-        // Implement your logic based on stock status
-        return true;
+        if (value === 'available') {
+          return item.productQuantity > 0;
+        } else if (value === 'out-of-stock') {
+          return item.productQuantity === 0 || item.productQuantity === '0';
+        }
       } else if (type === 'assetType') {
-        return item.productType.toLowerCase() === value.toLowerCase();
+        return value === 'all' || item.productType.toLowerCase() === value.toLowerCase();
       }
       return true;
     });
+  
     setFilteredData(filtered);
   };
 
@@ -129,6 +133,7 @@ const AssetList = () => {
       : 
       ( <>
       {/* Search Section */}
+      <div>
       <input
         type="text"
         placeholder="Search by product name"
@@ -146,17 +151,18 @@ const AssetList = () => {
 
   <label>Asset Type:</label>
   <select onChange={(e) => handleFilter('assetType', e.target.value)}>
-    <option value="">All</option>
-    <option value="returnable">Returnable</option>
-    <option value="non-returnable">Non-returnable</option>
-  </select>
+  <option value="all">All</option>
+  <option value="returnable">Returnable</option>
+  <option value="non-returnable">Non-returnable</option>
+</select>
 </div>
+      </div>
 
       {/* Sorting Section */}
-      <div>
+      {/* <div>
         <label>Sort by Quantity:</label>
-        {/* Implement your quantity sort dropdown here */}
-      </div>
+       
+      </div> */}
 
       {/* DataTable */}
       <DataTable
