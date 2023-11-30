@@ -11,6 +11,7 @@ import AboutSection from "./DefaultHome/About/AboutSection";
 import Package from "./DefaultHome/Package/Package";
 import ReviewSwiper from "./DefaultHome/Review/Review";
 import RequestdLatestItem from "./EmployeeHome/MyMonthlyRequests/RequestdLatestItem";
+import CustomeRequestList from "./EmployeeHome/MyCustomeRequests/CustomeRequestList";
 
 
 
@@ -60,6 +61,9 @@ const Home = () => {
 </div>
 <div className="p-5">
 <RequestdLatestItem></RequestdLatestItem>
+</div>
+<div className="p-5">
+<CustomeRequestList></CustomeRequestList>
 </div>
                         </div>
                         </>

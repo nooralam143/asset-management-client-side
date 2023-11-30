@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Card, Modal } from 'flowbite-react';
 import DataTable from 'react-data-table-component';
-import useAssetRequest from '../../Hooks/useAssetRequest';
+import useAssetRequest from '../../../../Hooks/useAssetRequest';
 
-const RequestAsset = () => {
+
+const CustomeRequestList = () => {
   const { myRequestAsset } = useAssetRequest();
   const [searchTerm, setSearchTerm] = useState('');
   const [requestStatusFilter, setRequestStatusFilter] = useState('');
@@ -62,7 +63,7 @@ const RequestAsset = () => {
       sortable: true,
     },
     { name: 'Asset Name', selector: (row) => row.assetName, sortable: true },
-    { name: 'Asset Price', selector: (row) => row.assetPrice, sortable: true },
+    { name: 'Asset Price', selector: (row) => row.price, sortable: true },
     { name: 'Asset Type', selector: (row) => row.assetType, sortable: true },
     { name: 'Request Status', selector: (row) => row.requestStatus, sortable: true },
     {
@@ -99,7 +100,7 @@ const RequestAsset = () => {
   return (
     <div>
       <DataTable
-        title="My Request Asset:"
+        title="My Request Assets:"
         columns={columns}
         data={data}
         pagination
@@ -140,4 +141,4 @@ const RequestAsset = () => {
   );
 };
 
-export default RequestAsset;
+export default CustomeRequestList;
