@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card, Modal } from 'flowbite-react';
+import { Button, Modal } from 'flowbite-react';
 import DataTable from 'react-data-table-component';
 import useAssetRequest from '../../../../Hooks/useAssetRequest';
 
